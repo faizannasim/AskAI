@@ -1,11 +1,21 @@
-import React from 'react'
-import API from './Component/API'
+import React from "react"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+
+// Components
+import Home from "./Component/Home"
+import API from "./Component/API"
 
 function App() {
   return (
-    <div>
-      <API />
-    </div>
+    <Router>
+      <Routes>
+        {/* Homepage */}
+        <Route path="/" element={<Home />} />
+
+        {/* Chat page */}
+        <Route path="/chat" element={<API />} />
+      </Routes>
+    </Router>
   )
 }
 

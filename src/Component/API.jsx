@@ -105,8 +105,8 @@ function API() {
 
 
     return (
-        <div className='min-h-screen bg-black grid grid-cols-5'>
-            <div className='col-span-1 bg-gray-800 p-5'>
+        <div className=' min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800  grid grid-cols-5'>
+            <div className='col-span-1 bg-gray-900/80 backdrop-blur-md border-r border-gray-700 p-5'>
 
 
               <h2 className='text-gray-400 mb-4 font-bold text-xl text-center '>Recent History</h2>
@@ -127,27 +127,20 @@ function API() {
             </div>
 
 
-            <div className='col-span-4 p-8 flex flex-col '>
-                 <h1 className='text-cyan-400 text-3xl font-mono mb-4'>Ask me anything</h1>
+            <div className='col-span-4  flex-1 p-8 flex flex-col '>
+                  <h1 className="text-cyan-400 text-4xl font-bold mb-6 text-center tracking-wide">
+          Ask me Anything
+        </h1>
+
 
 
                 <div className='flex-1 overflow-auto p-5 bg-gray-800 rounded-xl mb-4 ' ref={ScrollToAns}>
 
 
                     {loading && (
-                        <div className='flex justify-center items-center h-full'>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="50" height="50">
-                            <circle fill="#FF156D" stroke="#FF156D" strokeWidth="2" r="7" cx="20" cy="30">
-                                <animate attributeName="cy" calcMode="spline" dur="2" values="30;70;30;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="-.4"></animate>
-                            </circle>
-                            <circle fill="#FF156D" stroke="#FF156D" strokeWidth="2" r="7" cx="50" cy="30">
-                                <animate attributeName="cy" calcMode="spline" dur="2" values="30;70;30;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="-.2"></animate>
-                            </circle>
-                            <circle fill="#FF156D" stroke="#FF156D" strokeWidth="2" r="7" cx="80" cy="30">
-                                <animate attributeName="cy" calcMode="spline" dur="2" values="30;70;30;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="0"></animate>
-                            </circle>
-                        </svg>
-                        </div>
+                        <div className="flex justify-center items-center h-full">
+              <span className="text-cyan-400 animate-pulse">AI is typing...</span>
+            </div>
 
                     )}
 
@@ -189,14 +182,14 @@ function API() {
                             value={question}
                             onChange={(e) => setQuestion(e.target.value)}
                             placeholder='Ask me Anything'
-                             className='flex-1 p-3 rounded-l-xl outline-none bg-gray-700 text-white placeholder-gray-400'
+                             className="flex-1 p-4 rounded-l-xl outline-none bg-gray-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-500"
                             onKeyDown={(e) => e.key === "Enter" && AskQuestion()} // it is used for enter 
                         />
 
 
                         <button
                             onClick={AskQuestion}
-                            className='bg-cyan-500 hover:bg-cyan-600 text-white px-6 rounded-r-xl transition'
+                           className="bg-cyan-500 hover:bg-cyan-600 text-white px-8 rounded-r-xl font-semibold transition"
                         >
                             Ask
                         </button>
