@@ -8,4 +8,4 @@ export function ReplaceHead(str) {
 }
 
 
-// it is used to replace thestar()
+// it is used to replace the star()

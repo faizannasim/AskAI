@@ -1,7 +1,7 @@
 import React from "react"
 import { useNavigate } from "react-router-dom"
 
-// Optional: replace with your hero image path
+
 const HERO_IMG = "/blob.svg"
 
 
@@ -11,7 +11,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
-      {/* Animated blobs */}
+     
       <div className="pointer-events-none absolute -left-32 -top-40 w-[600px] h-[600px] rounded-full bg-gradient-t-tr from-cyan-600 via-violet-600 to-pink-500 opacity-20 blur-3xl animate-blob"></div>
       <div className="pointer-events-none absolute -right-40 -bottom-48 w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-indigo-600 via-sky-600 to-emerald-400 opacity-14 blur-3xl animate-blob animation-delay-2000"></div>
 
@@ -25,7 +25,7 @@ export default function Home() {
 
       <main className="max-w-6xl mx-auto px-6 lg:px-8 pt-8 pb-20">
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          {/* Left: hero text */}
+         
           <div className="space-y-6">
             <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight">
               Ask anything. Get crisp answers. Fast.
@@ -56,7 +56,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Right: hero illustration */}
+          
           <div className="flex items-center justify-center">
             <div className="w-full max-w-md bg-zinc-900/40 border border-zinc-800 p-6 rounded-2xl shadow-lg">
               <img src={HERO_IMG} alt="hero" className="w-full h-48 object-contain" />
@@ -73,7 +73,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Features */}
+       
         <section id="features" className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
             { title: "Markdown + Code", desc: "Answers render markdown and highlight code blocks automatically." },
@@ -87,7 +87,7 @@ export default function Home() {
           ))}
         </section>
 
-        {/* Recent history preview */}
+        
         <section className="mt-12">
           <h3 className="text-lg font-semibold mb-3">Recent questions</h3>
 
@@ -108,7 +108,7 @@ export default function Home() {
           )}
         </section>
 
-        {/* Footer CTA */}
+     
         <footer className="mt-16 text-center text-zinc-400">
           <div className="max-w-xl mx-auto">
             Built with React + Tailwind  <button className="text-cyan-400 underline ml-2" onClick={() => navigate("/chat")}>Open chat</button>
@@ -116,7 +116,7 @@ export default function Home() {
         </footer>
       </main>
 
-      {/* Tailwind animation utilities (put this in global CSS if you prefer) */}
+      
       <style jsx>{`
         @keyframes blob {
           0% { transform: translateY(0) scale(1); }
