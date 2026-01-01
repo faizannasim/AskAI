@@ -2,7 +2,9 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { Copy, Check, RefreshCw, Trash2, Download, Moon, Sun, Zap, Code, Sparkles, MessageSquare, TrendingUp, Settings } from 'lucide-react';
 
 // Configuration
-const URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyBiEHlLh2CmVprbsT_NoIA-YmPBtNO3MRA";
+const URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyAFbl6IXiQYc80-75G2Uzcht0o4Q3JDC18";
+const RATE_LIMIT_DELAY = 6000;
+const MAX_RETRIES = 3;
 
 
 // Particle Animation Component
@@ -264,41 +266,27 @@ function API() {
         a.click();
     };
 
-    const fetchWithRetry = async (url, options, attempt = 1) => {
-        try {
-            const response = await fetch(url, options);
+   const fetchWithRetry = async (url, options, attempt = 1) => {
+    try {
+        const response = await fetch(url, options);
 
-            if (response.status === 429) {
-                if (attempt >= MAX_RETRIES) {
-                    throw new Error(` API Rate Limit Notice
-
-Failed to fetch
-
-⚡ What's happening: The Gemini API has rate limits to prevent abuse.
-
-✅ Your site is working fine! This is a temporary API restriction.
-
-⏱️ Solution: Wait a moment and try again. Free tier allows 15 requests/minute`);
-                }
-
-                const waitTime = Math.pow(2, attempt) * 1000;
-                setRetryCount(attempt);
-                setError(`Rate limited. Retrying in ${waitTime / 1000}s... (${attempt}/${MAX_RETRIES})`);
-                
-                await new Promise(resolve => setTimeout(resolve, waitTime));
-                return fetchWithRetry(url, options, attempt + 1);
+        if (response.status === 429) {
+            if (attempt >= MAX_RETRIES) {
+                throw new Error("API Limit Reached. Please wait 1 minute before trying again.");
             }
 
-            setRetryCount(0);
-            return response;
-        } catch (err) {
-            if (attempt >= MAX_RETRIES) throw err;
+            // Exponential backoff: 2s, 4s, 8s...
+            const waitTime = Math.pow(2, attempt) * 2000; 
+            setRetryCount(attempt);
             
-            const waitTime = Math.pow(2, attempt) * 1000;
             await new Promise(resolve => setTimeout(resolve, waitTime));
             return fetchWithRetry(url, options, attempt + 1);
         }
-    };
+        return response;
+    } catch (err) {
+        throw err;
+    }
+};
 
     const handleAsk = async () => {
         if (!question.trim() || loading) return;
