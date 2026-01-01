@@ -3,8 +3,7 @@ import { Copy, Check, RefreshCw, Trash2, Download, Moon, Sun, Zap, Code, Sparkle
 
 // Configuration
 const URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyBiEHlLh2CmVprbsT_NoIA-YmPBtNO3MRA";
-const RATE_LIMIT_DELAY = 4000;
-const MAX_RETRIES = 3;
+
 
 // Particle Animation Component
 function ParticleBackground({ darkMode }) {
@@ -271,7 +270,15 @@ function API() {
 
             if (response.status === 429) {
                 if (attempt >= MAX_RETRIES) {
-                    throw new Error("Rate limit exceeded. Please wait 60 seconds and try again.");
+                    throw new Error(` API Rate Limit Notice
+
+Failed to fetch
+
+⚡ What's happening: The Gemini API has rate limits to prevent abuse.
+
+✅ Your site is working fine! This is a temporary API restriction.
+
+⏱️ Solution: Wait a moment and try again. Free tier allows 15 requests/minute`);
                 }
 
                 const waitTime = Math.pow(2, attempt) * 1000;
@@ -619,15 +626,7 @@ function API() {
                             </div>
                         )}
 
-                        {error && (
-                            <div className={`p-5 rounded-2xl ${darkMode ? 'bg-yellow-500/10 border-2 border-yellow-500/30 backdrop-blur-sm' : 'bg-yellow-50 border-2 border-yellow-300'} text-sm flex items-start gap-3`}>
-                                <Sparkles size={20} className='text-yellow-500 mt-0.5' />
-                                <div>
-                                    <p className='font-semibold mb-1 text-yellow-500'>Notice</p>
-                                    <p className={darkMode ? 'text-yellow-200' : 'text-yellow-900'}>{error}</p>
-                                </div>
-                            </div>
-                        )}
+                        
                     </div>
                 </div>
 
